@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0f1f17">
+<title>호두나무 · 사과대추 한해농사 달력 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;700;900&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0f1f17;
+    --bg2:#13261c;
+    --panel:#ffffff;
+    --ink:#1c2620;
+    --ink-soft:#5d6b61;
+    --cream:#f7f4ec;
+    --gold:#c2a14d;
+    --gold-soft:#e3cf94;
+    --line:#ece6d6;
+    --emerald:#1f6b46;
+    --emerald-d:#0e3d28;
+    --walnut:#7a5638;
+    --jujube:#b23a2e;
+  }
+  *{ box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family:"Noto Sans KR","Apple SD Gothic Neo",sans-serif;
+    color:var(--ink);
+    font-size:18px; line-height:1.72;
+    background:
+      radial-gradient(1200px 600px at 50% -200px, #1c3a28 0%, rgba(28,58,40,0) 60%),
+      linear-gradient(180deg,#0f1f17 0%, #13261c 100%);
+    min-height:100vh;
+  }
+  .wrap{ max-width:760px; margin:0 auto; padding:0 18px 80px; }
+
+  /* ===== HERO ===== */
+  header.top{ text-align:center; padding:54px 16px 30px; position:relative; }
+  header.top .kicker{
+    display:inline-block; letter-spacing:.42em; font-size:12px; font-weight:700;
+    color:var(--gold-soft); text-transform:uppercase; margin-bottom:18px;
+    padding:7px 18px; border:1px solid rgba(194,161,77,.4); border-radius:100px;
+  }
+  header.top h1{
+    font-family:"Noto Serif KR",serif; font-weight:900;
+    font-size:38px; line-height:1.25; margin:0; color:#fff; letter-spacing:-.5px;
+  }
+  header.top h1 .amp{ color:var(--gold); font-weight:700; padding:0 6px; }
+  header.top .sub{
+    margin-top:14px; color:#a9bcae; font-size:15px; letter-spacing:.08em;
+  }
+  .gold-rule{ width:54px; height:2px; margin:22px auto 0;
+    background:linear-gradient(90deg,transparent,var(--gold),transparent); }
+
+  /* ===== NAVBAR ===== */
+  .navbar{ display:none; align-items:center; gap:12px;
+    background:rgba(255,255,255,.06); backdrop-filter:blur(8px);
+    border:1px solid rgba(227,207,148,.22); border-radius:16px;
+    padding:12px 14px; margin-bottom:22px; }
+  .navbar.show{ display:flex; }
+  .backbtn{ background:linear-gradient(135deg,var(--gold),#9c7f33); border:none; color:#1a1407;
+    font-size:15px; font-weight:800; padding:10px 18px; border-radius:11px; cursor:pointer;
+    box-shadow:0 4px 14px rgba(194,161,77,.3); }
+  .navbar .navtitle{ flex:1; color:#f0e8d4; font-weight:700; font-size:16px; letter-spacing:.02em; }
+
+  .section-label{ font-family:"Noto Serif KR",serif; font-size:21px; font-weight:700;
+    color:#f1ede1; margin:6px 4px 20px; letter-spacing:.01em; }
+  .section-label.dark{ color:var(--emerald-d); }
+
+  /* ===== BIG SELECT CARDS ===== */
+  .bigbtn{ position:relative; display:block; width:100%; border:none; cursor:pointer;
+    text-align:left; margin-bottom:18px; padding:30px 26px; border-radius:22px;
+    color:#fff; overflow:hidden; isolation:isolate;
+    box-shadow:0 18px 40px -18px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.12);
+    transition:transform .18s ease, box-shadow .18s ease; }
+  .bigbtn::after{ content:""; position:absolute; inset:0; z-index:-1;
+    background:linear-gradient(120deg,rgba(255,255,255,.14),rgba(255,255,255,0) 38%); }
+  .bigbtn:active{ transform:translateY(2px) scale(.997); }
+  .bigbtn .row{ display:flex; align-items:center; gap:16px; }
+  .bigbtn .emo{ font-size:34px; filter:drop-shadow(0 2px 4px rgba(0,0,0,.3)); }
+  .bigbtn .ttl{ font-family:"Noto Serif KR",serif; font-size:25px; font-weight:900; letter-spacing:-.3px; }
+  .bigbtn .desc{ display:block; margin-top:10px; font-size:14.5px; font-weight:500;
+    color:rgba(255,255,255,.82); letter-spacing:.02em; }
+  .bigbtn .chev{ margin-left:auto; font-size:24px; color:rgba(255,255,255,.65); }
+  .bigbtn .badge{ position:absolute; top:16px; right:18px; font-size:11px; font-weight:800;
+    letter-spacing:.14em; color:var(--gold-soft); border:1px solid rgba(227,207,148,.4);
+    padding:4px 11px; border-radius:100px; }
+
+  .tree-walnut{ background:linear-gradient(135deg,#5a3f29,#7a5638 55%,#946841); }
+  .tree-jujube{ background:linear-gradient(135deg,#8a2b22,#b23a2e 55%,#cf5747); }
+  .cat-bibi  { background:linear-gradient(135deg,#0e3d28,#1f6b46 60%,#2d8659); }
+  .cat-bangje{ background:linear-gradient(135deg,#0e2a48,#1c5286 60%,#2f6fae); }
+  .cat-jeonji{ background:linear-gradient(135deg,#5a4416,#8a6a22 60%,#a9842a); }
+  .cat-etc   { background:linear-gradient(135deg,#3c3357,#5b4d7a 60%,#74669c); }
+
+  /* ===== DETAIL CARDS ===== */
+  .card{ position:relative; background:var(--panel); border-radius:18px;
+    padding:22px 22px 20px; margin-bottom:16px;
+    box-shadow:0 14px 30px -22px rgba(0,0,0,.5); border:1px solid var(--line); }
+  .card::before{ content:""; position:absolute; left:0; top:18px; bottom:18px; width:4px;
+    border-radius:0 4px 4px 0; background:linear-gradient(180deg,var(--gold),var(--gold-soft)); }
+  .card .month{ display:flex; align-items:baseline; gap:10px; }
+  .card .month .mnum{ font-family:"Noto Serif KR",serif; font-size:23px; font-weight:900; color:var(--emerald-d); }
+  .card .season{ font-size:13px; color:var(--gold); font-weight:700; letter-spacing:.04em; }
+  .card .body{ margin-top:12px; font-size:17px; color:#33403a; }
+  .card .body strong{ color:var(--emerald); font-weight:700; }
+  .card.skip{ background:#faf8f2; border-style:dashed; }
+  .card.skip::before{ background:#d8d2c2; }
+  .card.skip .body{ color:#8c8472; }
+  .card.skip .month .mnum{ color:#8c8472; }
+  .card.warn{ background:#fff8f3; border-color:#f0d8c4; }
+  .card.warn::before{ background:linear-gradient(180deg,#d4452f,#e8775c); }
+  .card.warn .body strong{ color:#bf3a26; }
+  .card.warn .season{ color:#bf3a26; }
+
+  .notice{ background:linear-gradient(135deg,#fffaf0,#fff5e3); border:1px solid #ecd9a8;
+    border-radius:16px; padding:18px 20px; margin-bottom:18px; font-size:15.5px; color:#5e4d28;
+    box-shadow:0 10px 24px -20px rgba(120,90,20,.6); }
+  .notice b{ color:#a9791f; font-weight:800; }
+
+  .mix-table{ width:100%; border-collapse:separate; border-spacing:0; font-size:15px; margin-top:10px;
+    border:1px solid var(--line); border-radius:14px; overflow:hidden; background:#fff; }
+  .mix-table th,.mix-table td{ padding:11px 14px; text-align:left; border-bottom:1px solid var(--line); }
+  .mix-table th{ background:linear-gradient(135deg,#11402a,#1f6b46); color:#f3ecd8; font-weight:700; font-size:13.5px; letter-spacing:.03em; }
+  .mix-table tr:last-child td{ border-bottom:none; }
+  .mix-table td:first-child{ font-weight:700; color:var(--emerald-d); }
+
+  footer{ text-align:center; font-size:12.5px; color:#6f8074; margin-top:40px; letter-spacing:.1em; }
+  footer .fg{ color:var(--gold-soft); }
+  .hidden{ display:none; }
+  /* light surface when in detail/cat screens */
+  .surface{ background:var(--cream); border-radius:26px; padding:26px 22px 30px; margin-top:8px;
+    box-shadow:0 30px 60px -30px rgba(0,0,0,.6); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <span class="kicker">Annual Farming Calendar · 2026</span>
+    <h1>호두나무<span class="amp">&</span>사과대추<br>한 해 농사 달력</h1>
+    <div class="sub">거름 · 농약 · 가지치기 · 관리</div>
+    <div class="gold-rule"></div>
+  </header>
+
+  <div class="navbar" id="navbar">
+    <button class="backbtn" id="backbtn">‹ 뒤로</button>
+    <div class="navtitle" id="navtitle"></div>
+  </div>
+
+  <!-- 1단계: 나무 선택 -->
+  <div id="screen-home">
+    <div class="section-label">어떤 나무를 보시겠어요?</div>
+    <button class="bigbtn tree-walnut" onclick="selectTree('walnut')">
+      <span class="badge">WALNUT</span>
+      <div class="row"><span class="emo">🌰</span><div><span class="ttl">호두나무</span>
+        <span class="desc">시비 · 방제 · 전지 · 기타 — 월별 농사 안내</span></div>
+        <span class="chev">›</span></div>
+    </button>
+    <button class="bigbtn tree-jujube" onclick="selectTree('jujube')">
+      <span class="badge">JUJUBE</span>
+      <div class="row"><span class="emo">🍎</span><div><span class="ttl">사과대추</span>
+        <span class="desc">시비 · 방제 · 전지 · 물·수확 — 월별 농사 안내</span></div>
+        <span class="chev">›</span></div>
+    </button>
+  </div>
+
+  <!-- 2단계: 카테고리 선택 -->
+  <div id="screen-cat" class="hidden">
+    <div class="surface">
+      <div class="section-label dark" id="cat-label"></div>
+      <button class="bigbtn cat-bibi" onclick="selectCat('bibi')">
+        <div class="row"><span class="emo">🌱</span><div><span class="ttl">시비</span>
+          <span class="desc">거름주기 · 밑거름 · 웃거름 · 잎거름</span></div><span class="chev">›</span></div></button>
+      <button class="bigbtn cat-bangje" onclick="selectCat('bangje')">
+        <div class="row"><span class="emo">💊</span><div><span class="ttl">방제</span>
+          <span class="desc">농약치기 · 배합법 · 살포 시기</span></div><span class="chev">›</span></div></button>
+      <button class="bigbtn cat-jeonji" onclick="selectCat('jeonji')">
+        <div class="row"><span class="emo">✂️</span><div><span class="ttl">전지</span>
+          <span class="desc">가지치기 · 수형 · 순지르기</span></div><span class="chev">›</span></div></button>
+      <button class="bigbtn cat-etc" onclick="selectCat('etc')" style="margin-bottom:2px">
+        <div class="row"><span class="emo">📌</span><div><span class="ttl">기타</span>
+          <span class="desc">물주기 · 수확 · 갈무리 · 관리</span></div><span class="chev">›</span></div></button>
+    </div>
+  </div>
+
+  <!-- 3단계: 월별 내용 -->
+  <div id="screen-detail" class="hidden">
+    <div class="surface"><div id="detail-body"></div></div>
+  </div>
+
+  <footer>2026 한해농사 달력 · 3년생 50주 기준 · <span class="fg">made for 유재진</span></footer>
+</div>
+
+<script>
+const TREE_NAME = { walnut:"🌰 호두나무", jujube:"🍎 사과대추" };
+const CAT_NAME  = { bibi:"🌱 시비 (거름주기)", bangje:"💊 방제 (농약치기)", jeonji:"✂️ 전지 (가지치기)", etc:"📌 기타" };
+
+const DATA = {
+walnut: {
+  bibi: [
+    {m:"1~2월", s:"겨울 — 나무가 잠자는 시기", skip:true, b:"이번 달은 거름을 주지 않습니다. (땅이 얼어 있어 효과 없음)"},
+    {m:"3월", s:"봄 시작 — 밑거름 주는 달", b:"<strong>밑거름</strong> · 완전히 썩은 퇴비(소똥·계분 등 완숙 퇴비)<br>· 양: 200평당 3,000~4,000kg / 나무 1그루당 30~40kg<br>· 가지 끝이 닿는 땅에 빙 둘러 5cm 골을 파고 → 퇴비 넣고 → 흙 덮기<br>· 1년에 1번 (가을에 줬다면 봄 생략 가능)"},
+    {m:"4월", s:"싹 트는 달 — 어린나무 영양 보충", b:"<strong>미량요소 보충</strong> · 미량요소 복합비료(아연·구리·망간)<br>· 1㎡당 10~15g (종이컵 1/10)<br>· 나무 주변 땅에 골고루 뿌리고 물 주기 · 싹 틀 무렵 1번"},
+    {m:"5월", s:"꽃 피는 달", b:"<strong>어린나무만</strong> · 요소 비료(어린나무·묘목만)<br>· 1㎡당 15g(밥숟가락 1개) · 줄기에서 한 뼘 떨어뜨려 주기<br>· 어린 싹에 직접 닿으면 타 버립니다"},
+    {m:"6월", s:"열매 굵어지는 달 — 웃거름", b:"<strong>웃거름</strong> · 인산·칼륨 복합비료(질소 적은 것, 예 0-20-20)<br>· 큰 나무 1그루당 한 줌 가득(약 100g)<br>· 가지 끝 닿는 땅에 5cm 골 파고 묻기 · 6월 초 1번"},
+    {m:"7월", s:"장마철 — 웃거름 2차 + 잎거름", b:"<strong>땅거름</strong> 인산·칼륨, 1그루당 한 줌(7월 중순 1번)<br><strong>잎거름</strong> 제일인산칼륨을 물 20L에 40~60g(0.2~0.3%) 타서 잎 앞뒤로<br>· 아침 이슬 마른 뒤, 오전 10시 전"},
+    {m:"8월", s:"열매 익는 달 — 잎거름 2차", warn:true, b:"<strong>잎거름</strong> 인산칼륨 물 20L에 40~60g (7월에 이어 2번째)<br>★ <strong>8월부터 질소 비료(요소 등) 절대 금지!</strong> 새 가지가 나와 겨울에 얼어 죽습니다"},
+    {m:"9월", s:"수확의 달 — 가을거름", b:"<strong>가을거름</strong> · 칼륨·인산 비료<br>· 큰 나무 1그루당 한 줌 조금 안 되게(80g)<br>· 가지 끝 닿는 땅에 골 파고 묻기 · 9월 상순 1번 · 지친 나무 기운 보충"},
+    {m:"10월", s:"수확 마무리 — 밑거름", b:"<strong>밑거름(내년 준비)</strong> · 완숙 퇴비<br>· 200평당 3,000kg / 나무 1그루당 30kg<br>· 가지 끝 닿는 땅에 골 파고 묻기 · 겨우내 삭아 내년 봄 새싹의 밥"},
+    {m:"11~12월", s:"겨울 채비", skip:true, b:"10월에 밑거름을 줬다면 끝. 안 줬다면 땅 얼기 전(12월 중순 전)에 주세요."}
+  ],
+  bangje: [
+    {m:"1~2월", s:"겨울", skip:true, b:"이번 달은 농약을 치지 않습니다."},
+    {m:"3월", s:"봄 시작 — 겨울 병균 예방", b:"<strong>석회보르도액</strong>(석회유황합제도 가능)<br>· 약 1 : 물 500 (물 20L 한 통에 약 40mL)<br>· 싹 트기 전 1~2번, 분무기로 줄기·가지 흠뻑<br>· 새잎 나온 뒤에는 X (잎이 탑니다)"},
+    {m:"4월", s:"싹 트는 달", skip:true, b:"3월에 석회보르도액을 쳤다면 이번 달은 쉽니다."},
+    {m:"5월", s:"병 예방 1차 — 탄저병·갈색썩음병", b:"<strong>테부코나졸 유제 25%</strong> 물 20L에 10mL <b>+</b> <strong>부라마이신(스트렙토마이신)</strong> 물 20L에 20g (한 통에 혼용)<br>· 5월 중순~하순, 비 오기 전 · 잎 뒷면·열매까지 흠뻑(노즐 위로)"},
+    {m:"6월", s:"병 예방 2·3차", b:"테부코나졸 10mL + 부라마이신 20g (5월과 같은 약)<br>· 6월 1일경 1번, 6월 15일경 1번 — 보름 간격 2번<br>· 낮 35도 넘는 무더운 날은 X (잎이 탑니다)"},
+    {m:"7월", s:"장마 집중 방제 4·5차", b:"<strong>플루아지남 액상수화제 50%</strong> 물 20L에 20mL — 7/1, 7/15 (약 바꿔서 내성 예방)<br><strong>알타코아</strong>(복숭아명나방) 물 20L에 10g — 7월 하순 1번, 벌레가 열매 속 들어가기 전<br>· 비 오기 한나절 전에"},
+    {m:"8월", s:"열매 익는 달 — 명나방 2차", b:"<strong>에토펜프록스 유제(트레본)</strong> 물 20L에 10mL (7월 약과 바꿔서)<br>· 8월 중순 1번 · 열매와 가지에 집중"},
+    {m:"9월", s:"수확의 달", skip:true, b:"수확하는 달에는 농약을 치지 않습니다. (먹는 열매에 약이 남으면 안 됩니다)"},
+    {m:"10월", s:"수확 마무리", skip:true, b:"수확·갈무리에 집중. 농약 살포 없음."},
+    {m:"11~12월", s:"겨울 채비 — 월동 해충(선택)", b:"<strong>기계유 유제(겨울용)</strong> · 약 1 : 물 20~25 (물 20L에 약 1L, 진하게)<br>· 잎이 다 떨어진 후, 기온 5도 이하인 날<br>· 줄기·굵은 가지에 흠뻑 (응애·깍지벌레 알 잡기)"}
+  ],
+  jeonji: [
+    {m:"1~2월", s:"가지치기의 달 (가장 중요)", b:"<strong>겨울 가지치기</strong><br>· 죽은 가지, 병든 가지, 안쪽으로 자란 가지, 엇갈린 가지를 잘라냅니다<br>· 톱·전정가위로 가지 밑동에서 바짝<br>· 굵은 가지(엄지 이상) 자른 자리엔 상처 보호제(톱신 페이스트)<br>· 수형: 가운데 비워 햇빛 들게, 큰 가지 3~4개만<br>· <strong>2월 말까지 끝내기</strong> (3월부터 물 오름)"},
+    {m:"3월", s:"봄 시작", skip:true, b:"겨울 가지치기에서 빠뜨린 가지는 3월 초까지만 마무리하세요."},
+    {m:"4월", s:"싹 트는 달 — 가지 살피기", b:"<strong>얼어 죽은 가지 확인</strong><br>· 싹이 안 나오는 가지는 죽은 것 → 살아 있는 부분에서 1cm 위를 자름<br>· 잘라 봐서 속이 갈색이면 죽은 것, 연두색이면 산 것"},
+    {m:"5월", s:"꽃 피는 달", skip:true, b:"이번 달은 가지치기를 하지 않습니다."},
+    {m:"6월", s:"웃자란 가지 정리", b:"<strong>도장지(웃자란 가지) 정리</strong><br>· 나무 안쪽에서 하늘로 쭉쭉 자란 가지를 밑동에서 잘라냄<br>· 안쪽까지 햇빛이 들어야 열매가 굵어집니다"},
+    {m:"7월", s:"장마철", skip:true, b:"웃자란 가지가 또 나왔으면 밑동에서 잘라 주는 정도만."},
+    {m:"8월", s:"열매 익는 달 — 바람길 내기", b:"<strong>바람길 내기</strong><br>· 나무 안쪽 빽빽한 잔가지, 아래로 처진 가지 정리<br>· 바람이 잘 통해야 병이 안 생기고 열매가 잘 익습니다"},
+    {m:"9월", s:"수확의 달", skip:true, b:"수확에 집중. 가지치기 없음."},
+    {m:"10월", s:"수확 마무리 — 병든 가지 정리", b:"<strong>병든 가지·낙엽 정리</strong><br>· 모아서 태우거나 멀리 버립니다<br>· 병균이 낙엽에서 겨울을 나고 내년에 또 옮깁니다"},
+    {m:"11~12월", s:"겨울 채비 — 가지치기 준비", skip:true, b:"1~2월 가지치기 때 자를 가지를 미리 봐 두면 좋습니다."}
+  ],
+  etc: [
+    {m:"6월", s:"풀베기 1차", b:"<strong>🌿 풀베기 1차</strong> · 나무 주변 풀을 깎아 줍니다(거름 뺏기지 않게)"},
+    {m:"7월", s:"장마 관리", b:"<strong>🌧 장마</strong> · 물이 고이는 곳은 도랑을 쳐서 물길을 내 주세요"},
+    {m:"8월", s:"풀베기 2차", b:"<strong>🌿 풀베기 2차</strong> · 수확 전 마지막 풀베기"},
+    {m:"9월", s:"수확", b:"<strong>🍂 수확</strong><br>· 겉껍질이 갈라지기 시작하면(백로 무렵, 9월 상순~)<br>· 나무를 털거나 장대로 — 떨어진 것은 바로 줍기(청설모·까치가 먼저 따 감)<br>· 익는 대로 서둘러 수확"},
+    {m:"10월", s:"수확 마무리·갈무리", b:"<strong>🍂 갈무리</strong><br>· 남은 열매 수확 → 겉껍질 벗기기 → 그늘에서 2~3주 말리기<br>· 알맹이가 딸깍 소리 나면 다 마른 것<br>· 망에 담아 서늘하고 건조한 곳에 저장"},
+    {m:"11~12월", s:"줄기 보호", b:"<strong>🎨 줄기 하얗게 칠하기(도백)</strong><br>· 물 20L + 생석회 5kg + 유황합제 0.5kg + 소금 0.4kg + 동물성 기름 0.5kg<br>· 줄기 아래쪽과 큰 가지에 붓·솔로 하얗게<br>· 효과: 동해(줄기 터짐) 방지 + 나무좀이 줄기에 알 낳는 것 방지"}
+  ]
+},
+jujube: {
+  bibi: [
+    {m:"1~2월", s:"겨울", skip:true, b:"이번 달은 거름을 주지 않습니다."},
+    {m:"3월", s:"봄 준비 — 밑거름 주는 달", b:"<strong>밑거름</strong> · 완숙 퇴비 + 복합비료<br>· 나무 1그루당 퇴비 20kg + 복합비료 서너 줌(3~5kg은 밭 전체 기준)<br>· 가지 끝 닿는 땅에 빙 둘러 5cm 골 파고 → 퇴비·비료 넣고 → 흙 덮기<br>· <strong>접붙인 자리(접목부)가 흙에 묻히면 안 됩니다</strong>"},
+    {m:"4월", s:"빗자루병 예방주사 달", skip:true, b:"3월에 밑거름 줬으면 끝. 새로 심는 묘목은 퇴비 섞은 흙으로 심기."},
+    {m:"5월", s:"싹 트는 달", warn:true, b:"어린 묘목 위주 관리. ★ <strong>꽃 피기 전 질소 비료(요소 등) 절대 금지</strong> — 잎·가지만 무성해지고 꽃이 떨어져 열매가 안 달립니다"},
+    {m:"6월", s:"꽃 피는 달", warn:true, b:"★ <strong>아직 거름 주지 마세요!</strong> 열매가 달린 것을 확인한 뒤에 줍니다"},
+    {m:"7월", s:"열매 달리는 달 — 웃거름 + 칼슘 시작", b:"<strong>웃거름</strong>(열매 확인 후!) · 인산·칼륨(질소 적은 것) · 1그루당 한 줌, 가지 끝 골 파고 묻기<br><strong>🥛 칼슘 시작</strong> · 질산칼슘/염화칼슘 물 20L에 20~40g(0.1~0.2%)<br>· 7월 하순부터 <strong>10일마다 1번</strong> 잎·열매에 골고루 (열과 예방)"},
+    {m:"8월", s:"열매 굵어지는 달 — 칼슘 계속", b:"<strong>🥛 칼슘 계속</strong> · 물 20L에 20~40g, 10일마다 1번 (7월에 이어서)<br>· 열매 껍질이 단단해져 비 와도 안 터집니다"},
+    {m:"9월", s:"익어가는 달 — 칼슘 마무리", b:"<strong>🥛 칼슘 마무리</strong> · 수확 7~10일 전에 마지막으로 뿌리고 끝<br>· 수확 직전 너무 진하게 뿌리면 열매 표면이 얼룩집니다"},
+    {m:"10월", s:"수확 마무리 — 가을거름", b:"<strong>가을거름</strong> · 완숙 퇴비 + 칼륨 비료<br>· 나무 1그루당 퇴비 20kg + 칼륨 반 줌(50g)<br>· 가지 끝 닿는 땅에 골 파고 묻기 · 지친 나무 회복 + 내년 꽃눈 충실"},
+    {m:"11~12월", s:"겨울 채비", skip:true, b:"10월에 가을거름 줬으면 끝입니다."}
+  ],
+  bangje: [
+    {m:"1~2월", s:"겨울", skip:true, b:"이번 달은 농약을 치지 않습니다."},
+    {m:"3월", s:"봄 준비", skip:true, b:"이번 달은 농약을 치지 않습니다. (4월 수간주사 준비)"},
+    {m:"4월", s:"빗자루병 예방주사 놓는 달", b:"<strong>💉 빗자루병 예방 — 나무주사(수간주사)</strong><br>· 옥시테트라사이클린(OTC) 수화제 — 나무 항생제<br>· 주사량: 줄기 굵기 10cm당 약물 1L (어른 팔뚝 굵기면 1L)<br>· 방법: ① 줄기에 드릴로 비스듬히 구멍 → ② 주사기로 주입 → ③ 테이프로 봉하기<br>· 시기: 4월 말~5월 · 1년에 1번 · 주사 후 물 충분히<br>· ※ 빗자루병은 분무기로 못 잡습니다. 나무주사로만 예방됩니다"},
+    {m:"5월", s:"매미충 잡기 시작", b:"<strong>마름무늬매미충</strong>(빗자루병 옮기는 벌레)<br>· 에토펜프록스 유제(트레본) 약 1:물 2,000 (물 20L에 10mL — 소주잔 1/5)<br>· 5월 하순 1번, 나무 전체 흠뻑 (이후 6·7월에도 — 모두 2~3번)"},
+    {m:"6월", s:"꽃 피는 달 — 총채벌레 + 매미충", b:"<strong>스피네토람(델리게이트)</strong> 꽃 속 총채벌레약 · 물 20L에 10g · 꽃 안쪽까지 안개처럼 곱게<br><strong>에토펜프록스(트레본)</strong> 매미충 2차 · 물 20L에 10mL"},
+    {m:"7월", s:"열매 달리는 달 — 탄저병 + 응애", b:"<strong>폴리옥신비 수화제</strong>(탄저병) 물 20L에 20g, 비 오기 전 1번<br><strong>노블레스</strong>(응애약) 물 20L에 10mL, 가물고 더울 때 잎 뒷면에"},
+    {m:"8월", s:"열매 굵어지는 달 — 심식나방", b:"<strong>알타코아 또는 라피탄</strong>(복숭아심식나방) · 물 20L에 10g<br>· 8월 초 1번, 벌레가 열매 속 들어가기 전 · 열매에 집중<br>· 비 잦으면 디페노코나졸 혼합제(물 20L에 13mL) 1번 추가"},
+    {m:"9월", s:"익어가는 달", skip:true, b:"수확하는 달에는 농약을 치지 않습니다."},
+    {m:"10월", s:"수확 마무리", skip:true, b:"이번 달은 농약을 치지 않습니다."},
+    {m:"11~12월", s:"겨울 채비", skip:true, b:"이번 달은 농약을 치지 않습니다."}
+  ],
+  jeonji: [
+    {m:"1~2월", s:"겨울 — 가지치기와 병든 나무 정리", b:"<strong>겨울 가지치기</strong><br>· 무엇을: 웃자란 가지, 죽은 가지, 병든 가지, 가늘고 약한 가지<br>· 어떻게: 굵은 뼈대 가지(원줄기·큰 가지)는 남기고, 곁가지는 눈 2~3개 남기고 자름<br>· 수형: 원줄기가 곧게 위로, 큰 가지 2~3개 유지<br>· 자른 후: 굵은 자리에는 상처 보호제"},
+    {m:"3월", s:"봄 준비", skip:true, b:"겨울 가지치기 마무리만."},
+    {m:"4월", s:"새 묘목 심기·관리", b:"<strong>새 묘목 심기</strong><br>· 심기: 원래 묻혀 있던 깊이만큼만 (깊이 심으면 안 됨)<br>· 멀칭: 투명 비닐을 덮으면 땅이 따뜻해져 뿌리가 잘 내림<br>· 지주대: 쇠 파이프 세우고 묶어 바람에 안 꺾이게"},
+    {m:"5월", s:"어린 묘목 순 정리", b:"<strong>순 정리</strong><br>· 접붙인 데서 나온 새순이 10cm쯤 자라면<br>· 아래 잎 3장만 남기고 윗부분을 잘라 → 줄기가 굵고 튼튼해집니다"},
+    {m:"6월", s:"꽃 피는 달 — 순지르기(적심)", warn:true, b:"★ <strong>순지르기(적심) — 1년 중 가장 중요한 가위질!</strong><br>· 6월 초, 꽃 필 무렵 가지가 단단해지기 시작할 때<br>· 연장지(길게 뻗는 가지)의 끝부분: 아들 가지 1~2개만 남기고 끝을 자름<br>· 안쪽으로 향한 가지는 모두 자름 (햇빛 들어야 열매 답니다)<br>· <strong>가지 눕히기</strong>: 45~50도 각도로 E클립·이쑤시개로 벌려 주기"},
+    {m:"7월", s:"곁가지 정리 (2차)", b:"<strong>곁가지 정리</strong><br>· 곁가지가 7~9개 넘게 너무 많이 나왔으면<br>· 곁가지 끝을 한두 마디 잘라 → 양분이 열매로 갑니다"},
+    {m:"8월", s:"가지 정리", skip:true, b:"열매 가린 잔가지만 살짝 — 열매에 햇빛이 들어야 색이 곱게 듭니다."},
+    {m:"9월", s:"익어가는 달", skip:true, b:"수확에 집중."},
+    {m:"10월", s:"수확 마무리", skip:true, b:"수확·갈무리에 집중."},
+    {m:"11~12월", s:"겨울 채비 — 마지막 정리", b:"<strong>마지막 정리</strong><br>· 병든 가지·남은 웃자란 가지 정리, 자른 자리 보호제 바르기<br>· 기록: 올해 빗자루병 나온 자리, 열매 잘 달린 가지를 적어 두면 내년에 큰 도움"}
+  ],
+  etc: [
+    {m:"1~2월", s:"빗자루병 나무 정리 (아주 중요!)", warn:true, b:"<strong>🔥 빗자루병 나무 정리</strong><br>· 증상: 잎이 노랗고 자잘하게 빗자루처럼 다닥다닥<br>· 처리: <strong>발견 즉시 뿌리째 캐서 태우기</strong> — 두면 옆 나무로 번집니다<br>· 겨울이 캐내기 제일 좋은 때입니다"},
+    {m:"3월", s:"들묵새 씨 뿌리기", b:"<strong>🌿 들묵새 씨 뿌리기</strong>(풀 대신 키우기)<br>· 들묵새 씨앗을 300평당 3~4kg<br>· 여름에 저절로 쓰러져 멍석처럼 땅을 덮어 → 잡초 막고 가뭄·열과 예방"},
+    {m:"6월", s:"물 끊는 달", warn:true, b:"<strong>💧 물주기 — 이번 달은 물을 끊습니다</strong><br>· 꽃 필 때 물을 약간 말려야 꽃가루받이가 잘 되어 열매가 잘 달립니다"},
+    {m:"7월", s:"물주기 다시 시작", b:"<strong>💧 물주기 재개</strong><br>· 5~10일에 1번, 흠뻑<br>· 비 예보 2~3일 전 미리 물을 줘 두면 열매가 안 터집니다 (중요!)"},
+    {m:"8월", s:"물주기 + 병든 열매 정리", b:"<strong>💧 물주기</strong> 꾸준히 (들쭉날쭉하면 열매가 터짐)<br><strong>🔥</strong> 병든 열매·터진 열매는 보이는 대로 따서 밭 밖에 버리거나 태우기"},
+    {m:"9월", s:"물 마무리 + 수확 시작", b:"<strong>💧 물주기 마무리</strong><br><strong>🍎 수확 시작</strong> · 열매가 반 이상 붉게 물들고 단단할 때부터<br>· 손으로 비틀어 따기 — 여러 번 나눠서 익은 것부터<br>· 보관: 바람 잘 통하는 그늘, 또는 냉장"},
+    {m:"10월", s:"수확 마무리", b:"<strong>🍎 수확 마무리</strong><br>· 남은 열매 모두 수확 → 크기별로 골라 담기<br>· 떨어진 열매·터진 열매는 모두 주워 밭 밖으로 (병균 월동 방지)"},
+    {m:"11~12월", s:"빗자루병 최종 점검", b:"<strong>🔥 빗자루병 최종 점검</strong><br>· 잎 떨어진 뒤 가지가 빗자루처럼 뭉친 나무가 없는지 다시 확인<br>· 있으면 뿌리째 캐서 태우기 (겨울이 캐내기 제일 좋은 때)"}
+  ]
+}
+};
+
+const MIX = {
+  walnut: `<div class="notice"><b>⚠ 호두나무 농약 배합 안내</b> · 3년생 50주 기준 · 물 20L(한 말) 한 통<br>테부코나졸과 플루아지남은 같은 탄저병약 — 둘 중 하나만 골라 쓰세요(번갈아 쓰면 내성 예방).<br>호두나무와 사과대추는 등록 농약이 달라요. 반드시 나무별로 따로 배합해 따로 치세요.</div>
+  <table class="mix-table"><tr><th>용도</th><th>약 이름</th><th>물 20L당</th></tr>
+  <tr><td>탄저병약 (택1)</td><td>테부코나졸 유제 25%</td><td>10mL (소주잔 1/5)</td></tr>
+  <tr><td>탄저병약 (택1)</td><td>플루아지남 액상수화제 50%</td><td>20mL (소주잔 절반)</td></tr>
+  <tr><td>갈색썩음병약</td><td>스트렙토마이신 수화제 20%</td><td>20g (밥숟가락 1.5)</td></tr>
+  <tr><td>보조제(꼭!)</td><td>침투제 또는 전착제</td><td>10~20mL</td></tr></table>
+  <div class="card" style="margin-top:14px"><div class="month"><span class="mnum">🔄 약 타는 순서</span></div><div class="body">① 맑은 물 20L 채우기 → ② 가루약(스트렙토마이신 20g) 녹이기 → ③ 플루아지남 쓸 경우 20mL → ④ 테부코나졸 쓸 경우 맨 나중 10mL → ⑤ 마지막에 침투제 섞기</div></div>
+  <div class="card"><div class="month"><span class="mnum">⏰ 언제, 얼마나 자주</span></div><div class="body">6월 초부터 2주(14일) 간격 3번 이상, 장마 전 비 오기 전.<br>좋은 시간: 아침 7~9시 또는 오후 4~6시. 나쁜 시간: 낮 11시~오후 3시, 35도 넘는 무더위(잎 탐).<br>한 번 탄 약은 그날 다 쓰기. 3년생 50주면 물 20~40L면 충분.</div></div>`,
+  jujube: `<div class="notice"><b>⚠ 사과대추 농약 배합 안내</b> · 3년생 50주 기준 · 물 20L(한 말) 한 통<br>사과대추와 호두나무는 등록 농약이 달라요. 반드시 나무별로 따로 배합해 따로 치세요.</div>
+  <table class="mix-table"><tr><th>용도</th><th>약 이름</th><th>물 20L당</th></tr>
+  <tr><td>종합살균제(탄저 등)</td><td>폴리옥신비 수화제 10%</td><td>20g (밥숟가락 1.5)</td></tr>
+  <tr><td>나방 살충제</td><td>클로란트라닐리프롤 입상수화제</td><td>10g (밥숟가락 2/3)</td></tr>
+  <tr><td>총채벌레 살충제</td><td>스피네토람 입상수화제</td><td>10g (밥숟가락 2/3)</td></tr>
+  <tr><td>보조제</td><td>전착제</td><td>10~20mL</td></tr></table>
+  <div class="card" style="margin-top:14px"><div class="month"><span class="mnum">🔄 약 타는 순서</span></div><div class="body">① 맑은 물 20L 채우기 → ② 살균제 폴리옥신비 20g 녹이기 → ③ 살충제(스피네토람 또는 클로란트라닐리프롤) 10g 섞기 → ④ 마지막에 전착제 섞기</div></div>
+  <div class="card"><div class="month"><span class="mnum">⏰ 언제, 얼마나 자주</span></div><div class="body">6월 꽃 필 때부터 장마 전후 10~14일 간격 정기 살포.<br>좋은 시간: 아침 7~9시 또는 오후 4~6시. 나쁜 시간: 낮 11시~오후 3시, 35도 넘는 무더위.<br>총채벌레는 꽃 속에 숨으니 안개처럼 곱게, 나무 안쪽까지. 3년생 50주면 물 20~40L면 충분.</div></div>
+  <div class="notice"><b>⚠ 빗자루병</b>은 분무기로 못 잡습니다. 4~5월 나무주사(수간주사)로만 예방됩니다.</div>`
+};
+
+let curTree=null, curCat=null;
+function show(id){ ["screen-home","screen-cat","screen-detail"].forEach(s=>document.getElementById(s).classList.add("hidden")); document.getElementById(id).classList.remove("hidden"); window.scrollTo({top:0,behavior:"smooth"}); }
+function setNav(on,title){ const nb=document.getElementById("navbar"); if(on){nb.classList.add("show"); document.getElementById("navtitle").textContent=title;} else nb.classList.remove("show"); }
+function selectTree(t){ curTree=t; document.getElementById("cat-label").textContent=TREE_NAME[t]+" — 무엇을 보시겠어요?"; setNav(true,TREE_NAME[t]); show("screen-cat"); }
+function selectCat(c){ curCat=c; renderDetail(); setNav(true,TREE_NAME[curTree]+"  ›  "+CAT_NAME[c]); show("screen-detail"); }
+function renderDetail(){
+  const arr=DATA[curTree][curCat]; let html='';
+  if(curCat==='bangje'){ html+=MIX[curTree]; html+='<div class="section-label dark" style="margin-top:22px">📅 월별 방제</div>'; }
+  arr.forEach(item=>{
+    const cls=item.warn?'card warn':(item.skip?'card skip':'card');
+    html+=`<div class="${cls}"><div class="month"><span class="mnum">${item.m}</span><span class="season">${item.s||''}</span></div><div class="body">${item.b}</div></div>`;
+  });
+  document.getElementById("detail-body").innerHTML=html;
+}
+document.getElementById("backbtn").addEventListener("click",()=>{
+  const detailHidden=document.getElementById("screen-detail").classList.contains("hidden");
+  if(!detailHidden){ setNav(true,TREE_NAME[curTree]); show("screen-cat"); }
+  else { setNav(false); show("screen-home"); }
+});
+</script>
+</body>
+</html>
