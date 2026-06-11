@@ -124,6 +124,27 @@
   .mtable tr:last-child td{ border-bottom:none; }
   .mtable td:first-child{ color:var(--ink); font-weight:700; }
 
+  .dash-btn{ background:linear-gradient(135deg,rgba(203,176,121,.16),rgba(203,176,121,.05)); border-color:var(--line-strong); }
+  .dash-btn .ic{ background:rgba(203,176,121,.14); color:var(--gold-bright); }
+  #dash-seg{ display:flex; gap:8px; margin:0 0 18px; }
+  #dash-seg .seg{ flex:1; cursor:pointer; border:1px solid var(--line); background:var(--glass); color:var(--muted);
+    border-radius:14px; padding:13px; font-family:"Noto Serif KR",serif; font-weight:700; font-size:15px; transition:.16s; }
+  #dash-seg .seg:active{ transform:scale(.97); }
+  #dash-seg .seg.active{ color:#16140d; background:linear-gradient(135deg,var(--gold-bright),var(--gold)); border-color:transparent;
+    box-shadow:0 6px 18px -6px rgba(203,176,121,.5); }
+  .drow{ border:1px solid var(--line); border-radius:18px; padding:14px 16px; margin-bottom:12px;
+    background:linear-gradient(180deg,var(--glass-2),var(--glass)); backdrop-filter:blur(14px); }
+  .drow.now{ border-color:var(--line-strong); box-shadow:0 0 0 1px var(--line-strong), 0 14px 34px -20px rgba(203,176,121,.55); }
+  .drow .dm{ display:flex; align-items:baseline; gap:10px; padding-bottom:11px; margin-bottom:9px; border-bottom:1px solid var(--line); }
+  .drow .dmm{ font-family:"Noto Serif KR",serif; font-size:21px; font-weight:900; color:var(--gold-bright); line-height:1; }
+  .drow.now .dmm::after{ content:" · 이번 달"; font-family:"Noto Sans KR",sans-serif; font-size:10.5px; color:var(--gold); font-weight:700; letter-spacing:.04em; }
+  .drow .dss{ font-size:11.5px; color:var(--muted); }
+  .dt{ display:flex; gap:11px; align-items:flex-start; padding:5px 0; }
+  .dl{ flex:0 0 52px; font-size:12px; font-weight:700; padding-top:1px; }
+  .dl.bibi{ color:var(--green); } .dl.bangje{ color:var(--blue); } .dl.jeonji{ color:var(--amber); }
+  .dv{ font-size:14px; color:#ddd9cd; line-height:1.55; }
+  .dv.warn{ color:var(--red); font-weight:700; }
+  .dv.off{ color:var(--muted2); }
   footer{ text-align:center; font-size:11px; color:var(--muted2); margin-top:34px; letter-spacing:.14em; }
   footer .g{ color:var(--gold); }
   .hidden{ display:none; }
@@ -145,7 +166,13 @@
       <div class="sub">2026 · 거름 · 농약 · 가지치기</div>
       <div class="hairline"></div>
     </div>
-    <div class="eyebrow">Select Tree · 나무 선택</div>
+    <div class="eyebrow">Dashboard · 대시보드</div>
+    <button class="tile dash-btn" onclick="openDash()">
+      <div class="ic">📊</div>
+      <div class="tx"><div class="nm">한눈에 보는 1년</div><div class="ds">시비 · 방제 · 전지 월별 핵심 요약</div></div>
+      <div class="go">›</div>
+    </button>
+    <div class="eyebrow" style="margin-top:26px">Select Tree · 나무 선택</div>
     <button class="tile" onclick="selectTree('walnut')">
       <div class="ic">🌰</div>
       <div class="tx"><div class="nm">호두나무</div><div class="ds">시비 · 방제 · 전지 · 기타</div></div>
@@ -176,6 +203,15 @@
   <div id="screen-month" class="hidden">
     <div class="months" id="months"></div>
     <div class="panel" id="panel"></div>
+  </div>
+
+  <div id="screen-dash" class="hidden">
+    <div class="eyebrow">한눈에 보는 1년 · 월별 핵심</div>
+    <div id="dash-seg">
+      <button class="seg" data-t="walnut" onclick="setDashTree('walnut')">🌰 호두나무</button>
+      <button class="seg" data-t="jujube" onclick="setDashTree('jujube')">🍎 사과대추</button>
+    </div>
+    <div class="panel" id="dash-body"></div>
   </div>
 
 </div>
@@ -304,8 +340,49 @@ const MIX = {
   <div class="notice"><b>⚠ 빗자루병</b>은 분무기로 못 잡습니다. 4~5월 나무주사(수간주사)로만 예방됩니다.</div>`
 };
 
-let curTree=null, curCat=null;
+const DASH = {
+  walnut:[
+    {m:"1~2월", s:"겨울", bibi:"휴식", bangje:"휴식", jeonji:"겨울 가지치기 (2월 말까지)"},
+    {m:"3월", s:"봄 시작", bibi:"밑거름 완숙퇴비 30~40kg", bangje:"석회보르도액 (싹 트기 전)", jeonji:"빠뜨린 가지 마무리"},
+    {m:"4월", s:"싹 트는 달", bibi:"미량요소(아연·구리·망간)", bangje:"휴식", jeonji:"언 가지 정리"},
+    {m:"5월", s:"꽃 피는 달", bibi:"어린나무만 요소비료", bangje:"1차 테부코나졸+부라마이신", jeonji:"휴식"},
+    {m:"6월", s:"열매 굵는 달", bibi:"웃거름 인산·칼륨 100g", bangje:"2·3차 (보름 간격)", jeonji:"웃자란 가지 정리"},
+    {m:"7월", s:"장마철", bibi:"웃거름 2차 + 잎거름", bangje:"플루아지남 + 명나방약", jeonji:"웃자란 가지만"},
+    {m:"8월", s:"열매 익는 달", bibi:"잎거름 2차 · 질소 금지", bibiW:true, bangje:"명나방 트레본", jeonji:"바람길 내기"},
+    {m:"9월", s:"수확의 달", bibi:"가을거름 80g", bangje:"휴식 (수확)", jeonji:"휴식"},
+    {m:"10월", s:"수확 마무리", bibi:"밑거름 퇴비 30kg", bangje:"휴식", jeonji:"병든 가지 정리"},
+    {m:"11~12월", s:"겨울 채비", bibi:"끝 (가을에 줬으면)", bangje:"기계유 유제 (월동)", jeonji:"자를 가지 점검"}
+  ],
+  jujube:[
+    {m:"1~2월", s:"겨울", bibi:"휴식", bangje:"휴식", jeonji:"가지치기 + 빗자루병 제거", jeonjiW:true},
+    {m:"3월", s:"봄 준비", bibi:"밑거름 퇴비+복합 20kg", bangje:"휴식 (주사 준비)", jeonji:"마무리만"},
+    {m:"4월", s:"예방주사 달", bibi:"휴식", bangje:"💉 빗자루병 수간주사", bangjeW:true, jeonji:"새 묘목 심기"},
+    {m:"5월", s:"싹 트는 달", bibi:"꽃 전 질소 금지", bibiW:true, bangje:"매미충 트레본 1차", jeonji:"묘목 순 정리"},
+    {m:"6월", s:"꽃 피는 달", bibi:"거름 금지 (열매 확인 전)", bibiW:true, bangje:"총채벌레 + 매미충", jeonji:"순지르기·가지 눕히기", jeonjiW:true},
+    {m:"7월", s:"열매 달리는 달", bibi:"웃거름 + 🥛칼슘 시작", bangje:"탄저병 + 응애", jeonji:"곁가지 정리 (2차)"},
+    {m:"8월", s:"열매 굵는 달", bibi:"🥛칼슘 계속 (10일마다)", bangje:"심식나방 알타코아", jeonji:"잔가지만 살짝"},
+    {m:"9월", s:"익어가는 달", bibi:"🥛칼슘 마무리", bangje:"휴식 (수확)", jeonji:"휴식"},
+    {m:"10월", s:"수확 마무리", bibi:"가을거름 퇴비+칼륨", bangje:"휴식", jeonji:"휴식"},
+    {m:"11~12월", s:"겨울 채비", bibi:"끝", bangje:"휴식", jeonji:"마지막 정리 + 빗자루병 점검"}
+  ]
+};
+let curTree=null, curCat=null, dashTree='walnut';
 const CUR_MONTH=new Date().getMonth()+1;
+function openDash(){ setBar(true,"Annual Calendar","📊 한눈에 보는 1년"); renderDash(); show("screen-dash"); }
+function setDashTree(t){ dashTree=t; renderDash(); }
+function renderDash(){
+  document.querySelectorAll("#dash-seg .seg").forEach(b=>b.classList.toggle("active", b.dataset.t===dashTree));
+  let html="";
+  DASH[dashTree].forEach(r=>{
+    const now=monthMatches(r.m,CUR_MONTH);
+    const cell=(v,w)=> v==="휴식"||v.indexOf("끝")===0 ? `<span class="dv off">${v}</span>` : `<span class="dv ${w?'warn':''}">${v}</span>`;
+    html+=`<div class="drow${now?' now':''}"><div class="dm"><span class="dmm">${r.m}</span><span class="dss">${r.s}</span></div>
+      <div class="dt"><span class="dl bibi">🌱 시비</span>${cell(r.bibi,r.bibiW)}</div>
+      <div class="dt"><span class="dl bangje">💊 방제</span>${cell(r.bangje,r.bangjeW)}</div>
+      <div class="dt"><span class="dl jeonji">✂️ 전지</span>${cell(r.jeonji,r.jeonjiW)}</div></div>`;
+  });
+  document.getElementById("dash-body").innerHTML=html;
+}
 function monthMatches(label,mnum){
   const r=label.match(/^(\d+)~(\d+)월$/);
   if(r) return mnum>=+r[1] && mnum<=+r[2];
@@ -313,7 +390,7 @@ function monthMatches(label,mnum){
   return s && +s[1]===mnum;
 }
 function show(id){
-  ["screen-home","screen-cat","screen-month"].forEach(s=>document.getElementById(s).classList.add("hidden"));
+  ["screen-home","screen-cat","screen-month","screen-dash"].forEach(s=>document.getElementById(s).classList.add("hidden"));
   document.getElementById(id).classList.remove("hidden");
   window.scrollTo({top:0,behavior:"instant"});
 }
