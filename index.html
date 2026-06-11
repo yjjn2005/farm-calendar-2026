@@ -2,202 +2,188 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#0f1f17">
-<title>호두나무 · 사과대추 한해농사 달력 2026</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#0a0c0b">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>한해농사 · 호두나무 사과대추</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;700;900&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Noto+Serif+KR:wght@600;700;900&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#0f1f17;
-    --bg2:#13261c;
-    --panel:#ffffff;
-    --ink:#1c2620;
-    --ink-soft:#5d6b61;
-    --cream:#f7f4ec;
-    --gold:#c2a14d;
-    --gold-soft:#e3cf94;
-    --line:#ece6d6;
-    --emerald:#1f6b46;
-    --emerald-d:#0e3d28;
-    --walnut:#7a5638;
-    --jujube:#b23a2e;
+    --bg:#0a0c0b; --ink:#f2efe6; --muted:#8d958c; --muted2:#6b736a;
+    --gold:#cbb079; --gold-bright:#ecd9a8; --gold-deep:#9a8048;
+    --glass:rgba(255,255,255,.045); --glass-2:rgba(255,255,255,.07);
+    --line:rgba(203,176,121,.16); --line-strong:rgba(203,176,121,.34);
+    --green:#62b489; --blue:#6ea7df; --amber:#d6b46a; --violet:#a99bd6; --red:#e08a72;
   }
-  *{ box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
-  html,body{ margin:0; padding:0; }
+  *{ box-sizing:border-box; -webkit-tap-highlight-color:transparent; -webkit-font-smoothing:antialiased; }
+  html,body{ margin:0; padding:0; height:100%; }
   body{
-    font-family:"Noto Sans KR","Apple SD Gothic Neo",sans-serif;
-    color:var(--ink);
-    font-size:18px; line-height:1.72;
+    font-family:"Noto Sans KR",-apple-system,sans-serif; color:var(--ink); font-size:16px; line-height:1.7;
     background:
-      radial-gradient(1200px 600px at 50% -200px, #1c3a28 0%, rgba(28,58,40,0) 60%),
-      linear-gradient(180deg,#0f1f17 0%, #13261c 100%);
-    min-height:100vh;
+      radial-gradient(120% 80% at 50% -10%, #16201a 0%, rgba(22,32,26,0) 55%),
+      radial-gradient(90% 60% at 90% 110%, #1a1812 0%, rgba(26,24,18,0) 50%), #0a0c0b;
+    background-attachment:fixed; min-height:100vh;
   }
-  .wrap{ max-width:760px; margin:0 auto; padding:0 18px 80px; }
+  .app{ max-width:460px; margin:0 auto; min-height:100vh; position:relative; padding:0 20px 120px; }
 
-  /* ===== HERO ===== */
-  header.top{ text-align:center; padding:54px 16px 30px; position:relative; }
-  header.top .kicker{
-    display:inline-block; letter-spacing:.42em; font-size:12px; font-weight:700;
-    color:var(--gold-soft); text-transform:uppercase; margin-bottom:18px;
-    padding:7px 18px; border:1px solid rgba(194,161,77,.4); border-radius:100px;
-  }
-  header.top h1{
-    font-family:"Noto Serif KR",serif; font-weight:900;
-    font-size:38px; line-height:1.25; margin:0; color:#fff; letter-spacing:-.5px;
-  }
-  header.top h1 .amp{ color:var(--gold); font-weight:700; padding:0 6px; }
-  header.top .sub{
-    margin-top:14px; color:#a9bcae; font-size:15px; letter-spacing:.08em;
-  }
-  .gold-rule{ width:54px; height:2px; margin:22px auto 0;
-    background:linear-gradient(90deg,transparent,var(--gold),transparent); }
+  .topbar{ position:sticky; top:0; z-index:30; display:flex; align-items:center; gap:12px;
+    padding:18px 0 14px; background:linear-gradient(180deg,var(--bg) 62%, rgba(10,12,11,0)); }
+  .topbar.hide{ display:none; }
+  .iconbtn{ width:42px; height:42px; flex:0 0 auto; display:flex; align-items:center; justify-content:center;
+    border-radius:13px; border:1px solid var(--line); background:var(--glass); color:var(--gold-bright);
+    font-size:19px; cursor:pointer; backdrop-filter:blur(10px); transition:.15s; }
+  .iconbtn:active{ transform:scale(.92); background:var(--glass-2); }
+  .crumb{ flex:1; min-width:0; }
+  .crumb .t1{ font-size:11px; letter-spacing:.22em; color:var(--gold); text-transform:uppercase; font-weight:700; }
+  .crumb .t2{ font-family:"Noto Serif KR",serif; font-size:18px; font-weight:700; color:var(--ink);
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis; margin-top:1px; }
 
-  /* ===== NAVBAR ===== */
-  .navbar{ display:none; align-items:center; gap:12px;
-    background:rgba(255,255,255,.06); backdrop-filter:blur(8px);
-    border:1px solid rgba(227,207,148,.22); border-radius:16px;
-    padding:12px 14px; margin-bottom:22px; }
-  .navbar.show{ display:flex; }
-  .backbtn{ background:linear-gradient(135deg,var(--gold),#9c7f33); border:none; color:#1a1407;
-    font-size:15px; font-weight:800; padding:10px 18px; border-radius:11px; cursor:pointer;
-    box-shadow:0 4px 14px rgba(194,161,77,.3); }
-  .navbar .navtitle{ flex:1; color:#f0e8d4; font-weight:700; font-size:16px; letter-spacing:.02em; }
+  .hero{ text-align:center; padding:42px 8px 26px; }
+  .hero .mono{ font-family:"Cormorant Garamond",serif; font-size:13px; letter-spacing:.5em; font-weight:600;
+    color:var(--gold); text-transform:uppercase; margin-bottom:20px; }
+  .hero .seal{ width:64px; height:64px; margin:0 auto 22px; border-radius:50%;
+    border:1px solid var(--line-strong); display:flex; align-items:center; justify-content:center;
+    font-size:30px; background:radial-gradient(circle at 50% 30%, rgba(203,176,121,.18), rgba(203,176,121,0));
+    box-shadow:0 0 0 6px rgba(203,176,121,.05), inset 0 1px 0 rgba(255,255,255,.06); }
+  .hero h1{ font-family:"Noto Serif KR",serif; font-weight:900; font-size:33px; line-height:1.32; margin:0; letter-spacing:-.5px; }
+  .hero h1 .amp{ color:var(--gold); font-family:"Cormorant Garamond",serif; font-weight:600; padding:0 4px; font-size:34px; }
+  .hero .sub{ margin-top:14px; color:var(--muted); font-size:13.5px; letter-spacing:.14em; font-weight:300; }
+  .hairline{ width:42px; height:1px; margin:24px auto 0; background:linear-gradient(90deg,transparent,var(--gold-deep),transparent); }
 
-  .section-label{ font-family:"Noto Serif KR",serif; font-size:21px; font-weight:700;
-    color:#f1ede1; margin:6px 4px 20px; letter-spacing:.01em; }
-  .section-label.dark{ color:var(--emerald-d); }
+  .eyebrow{ font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); font-weight:700; margin:6px 4px 16px; }
 
-  /* ===== BIG SELECT CARDS ===== */
-  .bigbtn{ position:relative; display:block; width:100%; border:none; cursor:pointer;
-    text-align:left; margin-bottom:18px; padding:30px 26px; border-radius:22px;
-    color:#fff; overflow:hidden; isolation:isolate;
-    box-shadow:0 18px 40px -18px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.12);
-    transition:transform .18s ease, box-shadow .18s ease; }
-  .bigbtn::after{ content:""; position:absolute; inset:0; z-index:-1;
-    background:linear-gradient(120deg,rgba(255,255,255,.14),rgba(255,255,255,0) 38%); }
-  .bigbtn:active{ transform:translateY(2px) scale(.997); }
-  .bigbtn .row{ display:flex; align-items:center; gap:16px; }
-  .bigbtn .emo{ font-size:34px; filter:drop-shadow(0 2px 4px rgba(0,0,0,.3)); }
-  .bigbtn .ttl{ font-family:"Noto Serif KR",serif; font-size:25px; font-weight:900; letter-spacing:-.3px; }
-  .bigbtn .desc{ display:block; margin-top:10px; font-size:14.5px; font-weight:500;
-    color:rgba(255,255,255,.82); letter-spacing:.02em; }
-  .bigbtn .chev{ margin-left:auto; font-size:24px; color:rgba(255,255,255,.65); }
-  .bigbtn .badge{ position:absolute; top:16px; right:18px; font-size:11px; font-weight:800;
-    letter-spacing:.14em; color:var(--gold-soft); border:1px solid rgba(227,207,148,.4);
-    padding:4px 11px; border-radius:100px; }
+  .tile{ position:relative; display:flex; align-items:center; gap:16px; width:100%; cursor:pointer;
+    text-align:left; border:1px solid var(--line); border-radius:20px; padding:20px;
+    background:var(--glass); backdrop-filter:blur(14px); color:var(--ink); margin-bottom:14px; transition:.18s; overflow:hidden; }
+  .tile::before{ content:""; position:absolute; left:0; top:0; bottom:0; width:3px;
+    background:linear-gradient(180deg,var(--gold-bright),var(--gold-deep)); opacity:0; transition:.18s; }
+  .tile:active{ transform:scale(.985); background:var(--glass-2); }
+  .tile:active::before{ opacity:1; }
+  .tile .ic{ width:52px; height:52px; flex:0 0 auto; border-radius:15px; display:flex; align-items:center; justify-content:center;
+    font-size:27px; border:1px solid var(--line); background:rgba(0,0,0,.25); }
+  .tile .tx .nm{ font-family:"Noto Serif KR",serif; font-size:21px; font-weight:700; letter-spacing:-.2px; }
+  .tile .tx .ds{ font-size:12.5px; color:var(--muted); margin-top:3px; letter-spacing:.02em; }
+  .tile .go{ margin-left:auto; color:var(--gold); font-size:18px; opacity:.7; }
 
-  .tree-walnut{ background:linear-gradient(135deg,#5a3f29,#7a5638 55%,#946841); }
-  .tree-jujube{ background:linear-gradient(135deg,#8a2b22,#b23a2e 55%,#cf5747); }
-  .cat-bibi  { background:linear-gradient(135deg,#0e3d28,#1f6b46 60%,#2d8659); }
-  .cat-bangje{ background:linear-gradient(135deg,#0e2a48,#1c5286 60%,#2f6fae); }
-  .cat-jeonji{ background:linear-gradient(135deg,#5a4416,#8a6a22 60%,#a9842a); }
-  .cat-etc   { background:linear-gradient(135deg,#3c3357,#5b4d7a 60%,#74669c); }
+  .grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .cat{ position:relative; cursor:pointer; border:1px solid var(--line); border-radius:22px;
+    background:var(--glass); backdrop-filter:blur(14px); padding:24px 18px 20px; text-align:left;
+    color:var(--ink); transition:.18s; overflow:hidden; min-height:148px; display:flex; flex-direction:column; }
+  .cat:active{ transform:scale(.97); }
+  .cat .glow{ position:absolute; top:-30px; right:-30px; width:110px; height:110px; border-radius:50%; filter:blur(34px); opacity:.5; }
+  .cat .badge{ width:50px; height:50px; border-radius:15px; display:flex; align-items:center; justify-content:center;
+    font-size:25px; border:1px solid var(--line-strong); background:rgba(0,0,0,.3); margin-bottom:auto; }
+  .cat .nm{ font-family:"Noto Serif KR",serif; font-size:19px; font-weight:700; margin-top:16px; }
+  .cat .ds{ font-size:11.5px; color:var(--muted); margin-top:4px; line-height:1.5; }
+  .cat.c-bibi .glow{ background:var(--green); } .cat.c-bangje .glow{ background:var(--blue); }
+  .cat.c-jeonji .glow{ background:var(--amber); } .cat.c-etc .glow{ background:var(--violet); }
+  .cat.c-bibi .badge{ color:var(--green); } .cat.c-bangje .badge{ color:var(--blue); }
+  .cat.c-jeonji .badge{ color:var(--amber); } .cat.c-etc .badge{ color:var(--violet); }
 
-  /* ===== DETAIL CARDS ===== */
-  .card{ position:relative; background:var(--panel); border-radius:18px;
-    padding:22px 22px 20px; margin-bottom:16px;
-    box-shadow:0 14px 30px -22px rgba(0,0,0,.5); border:1px solid var(--line); }
-  .card::before{ content:""; position:absolute; left:0; top:18px; bottom:18px; width:4px;
-    border-radius:0 4px 4px 0; background:linear-gradient(180deg,var(--gold),var(--gold-soft)); }
-  .card .month{ display:flex; align-items:baseline; gap:10px; }
-  .card .month .mnum{ font-family:"Noto Serif KR",serif; font-size:23px; font-weight:900; color:var(--emerald-d); }
-  .card .season{ font-size:13px; color:var(--gold); font-weight:700; letter-spacing:.04em; }
-  .card .body{ margin-top:12px; font-size:17px; color:#33403a; }
-  .card .body strong{ color:var(--emerald); font-weight:700; }
-  .card.skip{ background:#faf8f2; border-style:dashed; }
-  .card.skip::before{ background:#d8d2c2; }
-  .card.skip .body{ color:#8c8472; }
-  .card.skip .month .mnum{ color:#8c8472; }
-  .card.warn{ background:#fff8f3; border-color:#f0d8c4; }
-  .card.warn::before{ background:linear-gradient(180deg,#d4452f,#e8775c); }
-  .card.warn .body strong{ color:#bf3a26; }
-  .card.warn .season{ color:#bf3a26; }
+  .months{ display:flex; gap:9px; overflow-x:auto; padding:4px 20px 14px; margin:0 -20px;
+    scrollbar-width:none; -ms-overflow-style:none; scroll-snap-type:x proximity; }
+  .months::-webkit-scrollbar{ display:none; }
+  .mbtn{ flex:0 0 auto; scroll-snap-align:center; cursor:pointer; border:1px solid var(--line);
+    background:var(--glass); color:var(--muted); border-radius:13px; padding:11px 15px; font-size:14px; font-weight:700;
+    transition:.16s; white-space:nowrap; }
+  .mbtn:active{ transform:scale(.94); }
+  .mbtn.active{ color:#16140d; background:linear-gradient(135deg,var(--gold-bright),var(--gold));
+    border-color:transparent; box-shadow:0 6px 18px -6px rgba(203,176,121,.5); }
+  .mbtn.mix{ color:var(--gold-bright); border-color:var(--line-strong); }
+  .mbtn.mix.active{ color:#16140d; }
 
-  .notice{ background:linear-gradient(135deg,#fffaf0,#fff5e3); border:1px solid #ecd9a8;
-    border-radius:16px; padding:18px 20px; margin-bottom:18px; font-size:15.5px; color:#5e4d28;
-    box-shadow:0 10px 24px -20px rgba(120,90,20,.6); }
-  .notice b{ color:#a9791f; font-weight:800; }
+  .panel{ animation:rise .32s cubic-bezier(.2,.7,.3,1); }
+  @keyframes rise{ from{ opacity:0; transform:translateY(10px); } to{ opacity:1; transform:none; } }
+  .ccard{ position:relative; border:1px solid var(--line); border-radius:22px; padding:24px 22px;
+    background:linear-gradient(180deg,var(--glass-2),var(--glass)); backdrop-filter:blur(16px);
+    box-shadow:0 24px 50px -30px rgba(0,0,0,.9); }
+  .ccard .mhead{ display:flex; align-items:baseline; gap:12px; padding-bottom:16px; margin-bottom:18px; border-bottom:1px solid var(--line); }
+  .ccard .mhead .mm{ font-family:"Noto Serif KR",serif; font-size:30px; font-weight:900; color:var(--gold-bright); line-height:1; }
+  .ccard .mhead .ss{ font-size:12.5px; color:var(--muted); font-weight:500; letter-spacing:.02em; }
+  .ccard .body{ font-size:15.5px; color:#ddd9cd; }
+  .ccard .body strong{ color:var(--gold-bright); font-weight:700; }
+  .ccard .body b{ color:var(--ink); }
+  .ccard.skip{ background:rgba(255,255,255,.025); border-style:dashed; }
+  .ccard.skip .mm{ color:var(--muted); } .ccard.skip .body{ color:var(--muted); }
+  .ccard.warn{ border-color:rgba(224,138,114,.4); }
+  .ccard.warn::after{ content:""; position:absolute; left:0; top:22px; bottom:22px; width:3px; border-radius:3px;
+    background:linear-gradient(180deg,var(--red),#b85a42); }
+  .ccard.warn .mm{ color:var(--red); } .ccard.warn .body strong{ color:var(--red); }
 
-  .mix-table{ width:100%; border-collapse:separate; border-spacing:0; font-size:15px; margin-top:10px;
-    border:1px solid var(--line); border-radius:14px; overflow:hidden; background:#fff; }
-  .mix-table th,.mix-table td{ padding:11px 14px; text-align:left; border-bottom:1px solid var(--line); }
-  .mix-table th{ background:linear-gradient(135deg,#11402a,#1f6b46); color:#f3ecd8; font-weight:700; font-size:13.5px; letter-spacing:.03em; }
-  .mix-table tr:last-child td{ border-bottom:none; }
-  .mix-table td:first-child{ font-weight:700; color:var(--emerald-d); }
+  .pill{ display:inline-block; font-size:11px; font-weight:700; letter-spacing:.04em; color:var(--gold-bright);
+    border:1px solid var(--line-strong); border-radius:100px; padding:3px 11px; margin-bottom:14px; }
+  .notice{ border:1px solid rgba(214,180,106,.3); border-radius:18px; padding:16px 18px; margin-bottom:14px;
+    font-size:13.5px; color:#e7dcc4; background:rgba(214,180,106,.06); line-height:1.65; }
+  .notice b{ color:var(--gold-bright); font-weight:700; }
+  .mtable{ width:100%; border-collapse:separate; border-spacing:0; font-size:13px; margin-top:6px;
+    border:1px solid var(--line); border-radius:16px; overflow:hidden; }
+  .mtable th,.mtable td{ padding:11px 13px; text-align:left; border-bottom:1px solid var(--line); }
+  .mtable th{ background:rgba(203,176,121,.1); color:var(--gold-bright); font-weight:700; font-size:11.5px; letter-spacing:.04em; }
+  .mtable tr:last-child td{ border-bottom:none; }
+  .mtable td:first-child{ color:var(--ink); font-weight:700; }
 
-  footer{ text-align:center; font-size:12.5px; color:#6f8074; margin-top:40px; letter-spacing:.1em; }
-  footer .fg{ color:var(--gold-soft); }
+  footer{ text-align:center; font-size:11px; color:var(--muted2); margin-top:34px; letter-spacing:.14em; }
+  footer .g{ color:var(--gold); }
   .hidden{ display:none; }
-  /* light surface when in detail/cat screens */
-  .surface{ background:var(--cream); border-radius:26px; padding:26px 22px 30px; margin-top:8px;
-    box-shadow:0 30px 60px -30px rgba(0,0,0,.6); }
 </style>
 </head>
 <body>
-<div class="wrap">
+<div class="app">
 
-  <header class="top">
-    <span class="kicker">Annual Farming Calendar · 2026</span>
-    <h1>호두나무<span class="amp">&</span>사과대추<br>한 해 농사 달력</h1>
-    <div class="sub">거름 · 농약 · 가지치기 · 관리</div>
-    <div class="gold-rule"></div>
-  </header>
-
-  <div class="navbar" id="navbar">
-    <button class="backbtn" id="backbtn">‹ 뒤로</button>
-    <div class="navtitle" id="navtitle"></div>
+  <div class="topbar hide" id="topbar">
+    <button class="iconbtn" id="backbtn" aria-label="back">‹</button>
+    <div class="crumb"><div class="t1" id="crumb1">Annual Calendar</div><div class="t2" id="crumb2"></div></div>
   </div>
 
-  <!-- 1단계: 나무 선택 -->
   <div id="screen-home">
-    <div class="section-label">어떤 나무를 보시겠어요?</div>
-    <button class="bigbtn tree-walnut" onclick="selectTree('walnut')">
-      <span class="badge">WALNUT</span>
-      <div class="row"><span class="emo">🌰</span><div><span class="ttl">호두나무</span>
-        <span class="desc">시비 · 방제 · 전지 · 기타 — 월별 농사 안내</span></div>
-        <span class="chev">›</span></div>
+    <div class="hero">
+      <div class="mono">Annual Farming Calendar</div>
+      <div class="seal">🌿</div>
+      <h1>호두나무<span class="amp">&</span>사과대추<br>한 해 농사</h1>
+      <div class="sub">2026 · 거름 · 농약 · 가지치기</div>
+      <div class="hairline"></div>
+    </div>
+    <div class="eyebrow">Select Tree · 나무 선택</div>
+    <button class="tile" onclick="selectTree('walnut')">
+      <div class="ic">🌰</div>
+      <div class="tx"><div class="nm">호두나무</div><div class="ds">시비 · 방제 · 전지 · 기타</div></div>
+      <div class="go">›</div>
     </button>
-    <button class="bigbtn tree-jujube" onclick="selectTree('jujube')">
-      <span class="badge">JUJUBE</span>
-      <div class="row"><span class="emo">🍎</span><div><span class="ttl">사과대추</span>
-        <span class="desc">시비 · 방제 · 전지 · 물·수확 — 월별 농사 안내</span></div>
-        <span class="chev">›</span></div>
+    <button class="tile" onclick="selectTree('jujube')">
+      <div class="ic">🍎</div>
+      <div class="tx"><div class="nm">사과대추</div><div class="ds">시비 · 방제 · 전지 · 물·수확</div></div>
+      <div class="go">›</div>
     </button>
+    <footer>2026 한해농사 달력 · 3년생 50주 기준 · <span class="g">유재진</span></footer>
   </div>
 
-  <!-- 2단계: 카테고리 선택 -->
   <div id="screen-cat" class="hidden">
-    <div class="surface">
-      <div class="section-label dark" id="cat-label"></div>
-      <button class="bigbtn cat-bibi" onclick="selectCat('bibi')">
-        <div class="row"><span class="emo">🌱</span><div><span class="ttl">시비</span>
-          <span class="desc">거름주기 · 밑거름 · 웃거름 · 잎거름</span></div><span class="chev">›</span></div></button>
-      <button class="bigbtn cat-bangje" onclick="selectCat('bangje')">
-        <div class="row"><span class="emo">💊</span><div><span class="ttl">방제</span>
-          <span class="desc">농약치기 · 배합법 · 살포 시기</span></div><span class="chev">›</span></div></button>
-      <button class="bigbtn cat-jeonji" onclick="selectCat('jeonji')">
-        <div class="row"><span class="emo">✂️</span><div><span class="ttl">전지</span>
-          <span class="desc">가지치기 · 수형 · 순지르기</span></div><span class="chev">›</span></div></button>
-      <button class="bigbtn cat-etc" onclick="selectCat('etc')" style="margin-bottom:2px">
-        <div class="row"><span class="emo">📌</span><div><span class="ttl">기타</span>
-          <span class="desc">물주기 · 수확 · 갈무리 · 관리</span></div><span class="chev">›</span></div></button>
+    <div class="eyebrow" id="cat-eyebrow">Select Task · 작업 선택</div>
+    <div class="grid">
+      <button class="cat c-bibi" onclick="selectCat('bibi')"><span class="glow"></span>
+        <span class="badge">🌱</span><span class="nm">시비</span><span class="ds">거름주기<br>밑·웃·잎거름</span></button>
+      <button class="cat c-bangje" onclick="selectCat('bangje')"><span class="glow"></span>
+        <span class="badge">💊</span><span class="nm">방제</span><span class="ds">농약치기<br>배합·살포</span></button>
+      <button class="cat c-jeonji" onclick="selectCat('jeonji')"><span class="glow"></span>
+        <span class="badge">✂️</span><span class="nm">전지</span><span class="ds">가지치기<br>수형·순지르기</span></button>
+      <button class="cat c-etc" onclick="selectCat('etc')"><span class="glow"></span>
+        <span class="badge">📌</span><span class="nm">기타</span><span class="ds">물·수확<br>갈무리·관리</span></button>
     </div>
   </div>
 
-  <!-- 3단계: 월별 내용 -->
-  <div id="screen-detail" class="hidden">
-    <div class="surface"><div id="detail-body"></div></div>
+  <div id="screen-month" class="hidden">
+    <div class="months" id="months"></div>
+    <div class="panel" id="panel"></div>
   </div>
 
-  <footer>2026 한해농사 달력 · 3년생 50주 기준 · <span class="fg">made for 유재진</span></footer>
 </div>
 
 <script>
-const TREE_NAME = { walnut:"🌰 호두나무", jujube:"🍎 사과대추" };
-const CAT_NAME  = { bibi:"🌱 시비 (거름주기)", bangje:"💊 방제 (농약치기)", jeonji:"✂️ 전지 (가지치기)", etc:"📌 기타" };
+const TREE_NAME={ walnut:"호두나무", jujube:"사과대추" };
+const TREE_ICON={ walnut:"🌰", jujube:"🍎" };
+const CAT_NAME={ bibi:"시비 · 거름주기", bangje:"방제 · 농약치기", jeonji:"전지 · 가지치기", etc:"기타 · 관리" };
 
 const DATA = {
 walnut: {
@@ -297,43 +283,83 @@ jujube: {
 };
 
 const MIX = {
-  walnut: `<div class="notice"><b>⚠ 호두나무 농약 배합 안내</b> · 3년생 50주 기준 · 물 20L(한 말) 한 통<br>테부코나졸과 플루아지남은 같은 탄저병약 — 둘 중 하나만 골라 쓰세요(번갈아 쓰면 내성 예방).<br>호두나무와 사과대추는 등록 농약이 달라요. 반드시 나무별로 따로 배합해 따로 치세요.</div>
-  <table class="mix-table"><tr><th>용도</th><th>약 이름</th><th>물 20L당</th></tr>
-  <tr><td>탄저병약 (택1)</td><td>테부코나졸 유제 25%</td><td>10mL (소주잔 1/5)</td></tr>
-  <tr><td>탄저병약 (택1)</td><td>플루아지남 액상수화제 50%</td><td>20mL (소주잔 절반)</td></tr>
-  <tr><td>갈색썩음병약</td><td>스트렙토마이신 수화제 20%</td><td>20g (밥숟가락 1.5)</td></tr>
+  walnut: `<span class="pill">AGROCHEMICAL · 농약 배합</span>
+  <div class="notice"><b>⚠ 호두나무 농약 배합</b> · 3년생 50주 기준 · 물 20L(한 말) 한 통<br>테부코나졸과 플루아지남은 같은 탄저병약 — 둘 중 하나만 골라 쓰세요(번갈아 쓰면 내성 예방).<br>호두나무와 사과대추는 등록 농약이 다릅니다. 반드시 나무별로 따로 배합해 따로 치세요.</div>
+  <table class="mtable"><tr><th>용도</th><th>약 이름</th><th>물 20L당</th></tr>
+  <tr><td>탄저병약 (택1)</td><td>테부코나졸 유제 25%</td><td>10mL</td></tr>
+  <tr><td>탄저병약 (택1)</td><td>플루아지남 액상수화제 50%</td><td>20mL</td></tr>
+  <tr><td>갈색썩음병약</td><td>스트렙토마이신 수화제 20%</td><td>20g</td></tr>
   <tr><td>보조제(꼭!)</td><td>침투제 또는 전착제</td><td>10~20mL</td></tr></table>
-  <div class="card" style="margin-top:14px"><div class="month"><span class="mnum">🔄 약 타는 순서</span></div><div class="body">① 맑은 물 20L 채우기 → ② 가루약(스트렙토마이신 20g) 녹이기 → ③ 플루아지남 쓸 경우 20mL → ④ 테부코나졸 쓸 경우 맨 나중 10mL → ⑤ 마지막에 침투제 섞기</div></div>
-  <div class="card"><div class="month"><span class="mnum">⏰ 언제, 얼마나 자주</span></div><div class="body">6월 초부터 2주(14일) 간격 3번 이상, 장마 전 비 오기 전.<br>좋은 시간: 아침 7~9시 또는 오후 4~6시. 나쁜 시간: 낮 11시~오후 3시, 35도 넘는 무더위(잎 탐).<br>한 번 탄 약은 그날 다 쓰기. 3년생 50주면 물 20~40L면 충분.</div></div>`,
-  jujube: `<div class="notice"><b>⚠ 사과대추 농약 배합 안내</b> · 3년생 50주 기준 · 물 20L(한 말) 한 통<br>사과대추와 호두나무는 등록 농약이 달라요. 반드시 나무별로 따로 배합해 따로 치세요.</div>
-  <table class="mix-table"><tr><th>용도</th><th>약 이름</th><th>물 20L당</th></tr>
-  <tr><td>종합살균제(탄저 등)</td><td>폴리옥신비 수화제 10%</td><td>20g (밥숟가락 1.5)</td></tr>
-  <tr><td>나방 살충제</td><td>클로란트라닐리프롤 입상수화제</td><td>10g (밥숟가락 2/3)</td></tr>
-  <tr><td>총채벌레 살충제</td><td>스피네토람 입상수화제</td><td>10g (밥숟가락 2/3)</td></tr>
+  <div class="ccard" style="margin-top:14px"><div class="mhead"><span class="ss"><b>🔄 약 타는 순서</b></span></div><div class="body">① 맑은 물 20L 채우기 → ② 가루약(스트렙토마이신 20g) 녹이기 → ③ 플루아지남 쓸 경우 20mL → ④ 테부코나졸 쓸 경우 맨 나중 10mL → ⑤ 마지막에 침투제 섞기</div></div>
+  <div class="ccard" style="margin-top:12px"><div class="mhead"><span class="ss"><b>⏰ 언제, 얼마나 자주</b></span></div><div class="body">6월 초부터 2주(14일) 간격 3번 이상, 장마 전 비 오기 전.<br>좋은 시간: 아침 7~9시 / 오후 4~6시. 나쁜 시간: 낮 11시~오후 3시, 35도 넘는 무더위.<br>한 번 탄 약은 그날 다 쓰기. 3년생 50주면 물 20~40L면 충분.</div></div>`,
+  jujube: `<span class="pill">AGROCHEMICAL · 농약 배합</span>
+  <div class="notice"><b>⚠ 사과대추 농약 배합</b> · 3년생 50주 기준 · 물 20L(한 말) 한 통<br>사과대추와 호두나무는 등록 농약이 다릅니다. 반드시 나무별로 따로 배합해 따로 치세요.</div>
+  <table class="mtable"><tr><th>용도</th><th>약 이름</th><th>물 20L당</th></tr>
+  <tr><td>종합살균제(탄저 등)</td><td>폴리옥신비 수화제 10%</td><td>20g</td></tr>
+  <tr><td>나방 살충제</td><td>클로란트라닐리프롤 입상수화제</td><td>10g</td></tr>
+  <tr><td>총채벌레 살충제</td><td>스피네토람 입상수화제</td><td>10g</td></tr>
   <tr><td>보조제</td><td>전착제</td><td>10~20mL</td></tr></table>
-  <div class="card" style="margin-top:14px"><div class="month"><span class="mnum">🔄 약 타는 순서</span></div><div class="body">① 맑은 물 20L 채우기 → ② 살균제 폴리옥신비 20g 녹이기 → ③ 살충제(스피네토람 또는 클로란트라닐리프롤) 10g 섞기 → ④ 마지막에 전착제 섞기</div></div>
-  <div class="card"><div class="month"><span class="mnum">⏰ 언제, 얼마나 자주</span></div><div class="body">6월 꽃 필 때부터 장마 전후 10~14일 간격 정기 살포.<br>좋은 시간: 아침 7~9시 또는 오후 4~6시. 나쁜 시간: 낮 11시~오후 3시, 35도 넘는 무더위.<br>총채벌레는 꽃 속에 숨으니 안개처럼 곱게, 나무 안쪽까지. 3년생 50주면 물 20~40L면 충분.</div></div>
+  <div class="ccard" style="margin-top:14px"><div class="mhead"><span class="ss"><b>🔄 약 타는 순서</b></span></div><div class="body">① 맑은 물 20L 채우기 → ② 살균제 폴리옥신비 20g 녹이기 → ③ 살충제(스피네토람 또는 클로란트라닐리프롤) 10g 섞기 → ④ 마지막에 전착제 섞기</div></div>
+  <div class="ccard" style="margin-top:12px"><div class="mhead"><span class="ss"><b>⏰ 언제, 얼마나 자주</b></span></div><div class="body">6월 꽃 필 때부터 장마 전후 10~14일 간격 정기 살포.<br>좋은 시간: 아침 7~9시 / 오후 4~6시. 나쁜 시간: 낮 11시~오후 3시, 35도 넘는 무더위.<br>총채벌레는 꽃 속에 숨으니 안개처럼 곱게, 나무 안쪽까지.</div></div>
   <div class="notice"><b>⚠ 빗자루병</b>은 분무기로 못 잡습니다. 4~5월 나무주사(수간주사)로만 예방됩니다.</div>`
 };
 
 let curTree=null, curCat=null;
-function show(id){ ["screen-home","screen-cat","screen-detail"].forEach(s=>document.getElementById(s).classList.add("hidden")); document.getElementById(id).classList.remove("hidden"); window.scrollTo({top:0,behavior:"smooth"}); }
-function setNav(on,title){ const nb=document.getElementById("navbar"); if(on){nb.classList.add("show"); document.getElementById("navtitle").textContent=title;} else nb.classList.remove("show"); }
-function selectTree(t){ curTree=t; document.getElementById("cat-label").textContent=TREE_NAME[t]+" — 무엇을 보시겠어요?"; setNav(true,TREE_NAME[t]); show("screen-cat"); }
-function selectCat(c){ curCat=c; renderDetail(); setNav(true,TREE_NAME[curTree]+"  ›  "+CAT_NAME[c]); show("screen-detail"); }
-function renderDetail(){
-  const arr=DATA[curTree][curCat]; let html='';
-  if(curCat==='bangje'){ html+=MIX[curTree]; html+='<div class="section-label dark" style="margin-top:22px">📅 월별 방제</div>'; }
-  arr.forEach(item=>{
-    const cls=item.warn?'card warn':(item.skip?'card skip':'card');
-    html+=`<div class="${cls}"><div class="month"><span class="mnum">${item.m}</span><span class="season">${item.s||''}</span></div><div class="body">${item.b}</div></div>`;
+const CUR_MONTH=new Date().getMonth()+1;
+function monthMatches(label,mnum){
+  const r=label.match(/^(\d+)~(\d+)월$/);
+  if(r) return mnum>=+r[1] && mnum<=+r[2];
+  const s=label.match(/^(\d+)월$/);
+  return s && +s[1]===mnum;
+}
+function show(id){
+  ["screen-home","screen-cat","screen-month"].forEach(s=>document.getElementById(s).classList.add("hidden"));
+  document.getElementById(id).classList.remove("hidden");
+  window.scrollTo({top:0,behavior:"instant"});
+}
+function setBar(on,t1,t2){
+  const b=document.getElementById("topbar");
+  if(on){ b.classList.remove("hide"); document.getElementById("crumb1").textContent=t1; document.getElementById("crumb2").textContent=t2; }
+  else b.classList.add("hide");
+}
+function selectTree(t){
+  curTree=t;
+  document.getElementById("cat-eyebrow").textContent="Select Task · "+TREE_NAME[t]+" 작업";
+  setBar(true,"Annual Calendar",TREE_ICON[t]+" "+TREE_NAME[t]);
+  show("screen-cat");
+}
+function selectCat(c){
+  curCat=c; setBar(true,TREE_NAME[curTree],CAT_NAME[c]); buildMonths(); show("screen-month");
+}
+function buildMonths(){
+  const arr=DATA[curTree][curCat]; const wrap=document.getElementById("months");
+  let html=""; let defIdx=0, found=false;
+  if(curCat==='bangje') html+=`<button class="mbtn mix" data-idx="-1">💊 배합법</button>`;
+  arr.forEach((it,i)=>{
+    if(!found && monthMatches(it.m,CUR_MONTH)){ defIdx=i; found=true; }
+    html+=`<button class="mbtn" data-idx="${i}">${it.m}</button>`;
   });
-  document.getElementById("detail-body").innerHTML=html;
+  wrap.innerHTML=html;
+  wrap.querySelectorAll(".mbtn").forEach(b=>b.addEventListener("click",()=>selectMonth(+b.dataset.idx)));
+  selectMonth(defIdx);
+}
+function selectMonth(idx){
+  document.querySelectorAll("#months .mbtn").forEach(b=>b.classList.toggle("active",+b.dataset.idx===idx));
+  const p=document.getElementById("panel"); let html="";
+  if(idx===-1){ html=`<div class="panel">${MIX[curTree]}</div>`; }
+  else{
+    const it=DATA[curTree][curCat][idx];
+    const cls=it.warn?"ccard warn":(it.skip?"ccard skip":"ccard");
+    html=`<div class="panel"><div class="${cls}"><div class="mhead"><span class="mm">${it.m}</span><span class="ss">${it.s||""}</span></div><div class="body">${it.b}</div></div></div>`;
+  }
+  p.innerHTML=html;
+  const act=document.querySelector("#months .mbtn.active");
+  if(act) act.scrollIntoView({behavior:"smooth",inline:"center",block:"nearest"});
 }
 document.getElementById("backbtn").addEventListener("click",()=>{
-  const detailHidden=document.getElementById("screen-detail").classList.contains("hidden");
-  if(!detailHidden){ setNav(true,TREE_NAME[curTree]); show("screen-cat"); }
-  else { setNav(false); show("screen-home"); }
+  const monthVisible=!document.getElementById("screen-month").classList.contains("hidden");
+  if(monthVisible){ setBar(true,"Annual Calendar",TREE_ICON[curTree]+" "+TREE_NAME[curTree]); show("screen-cat"); }
+  else { setBar(false); show("screen-home"); }
 });
 </script>
 </body>
